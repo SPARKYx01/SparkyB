@@ -1,0 +1,51 @@
+<app-sidenav2 (onToggleSideNav)="onToggleSideNav($event)"></app-sidenav2>
+<div class="crud-page">
+  
+    <div class="crud-spacer"></div>
+    <div class="login-container" >
+      <div class="crud-container">
+        
+        <button class="btn btn-outline-success" (click)="openDialogee()" ><b>Creer une Agence</b></button>
+         <app-search></app-search> 
+      </div>  
+      <br>
+            <table class="table table-bordered " id="tabback">
+                    <thead>
+                            <tr>
+                                <th>Agence</th>
+
+                                <th>Ville</th>
+                                
+                                <th>Action</th>
+                            </tr>
+                            
+                        </thead>
+                        <tbody class="table-group-divider" *ngFor="let agence of agences  |  paginate: { itemsPerPage: itemsPerPage, currentPage: p }">
+                           
+                            <tr >
+                              <td><b>{{agence.nom }}</b></td>
+                              <td><b>{{agence.ville }}</b></td>
+                                
+                                <td>
+                                    <button class="btn btn-outline-success" (click)="opendelGrDialog(agence.id)">
+                                      Supprimer
+                                    </button>
+                                    <a>&nbsp;</a>
+                                    <button class="btn btn-outline-success" (click)="Modif(agence.id)">
+                                      Modifier
+                                  </button>
+                                  <a>&nbsp;</a>
+                                  <button class="btn btn-outline-success" (click)="afficherDetailsAgence(agence.id)">
+                                    Plus de Detail
+                                </button>
+                                </td>
+                            </tr>
+                            
+    
+                        </tbody>
+            </table>
+            <div style="display: flex; justify-content: center;">
+              <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            </div>
+    </div>
+  </div>

@@ -1,0 +1,57 @@
+<div class="crud-page">
+    <div class="crud-spacer"></div>
+    <div class="login-container">
+      <div class="crud-container">
+        <button class="btn btn-outline-success" (click)="AddProprieteGrandeurDialog()">
+          <b>Créer une nouvelle grandeur</b>
+        </button>
+        <app-search (onSearch)="performSearch($event)"></app-search>
+        <button class="btn btn-outline-success" (click)="executeAll()">
+          <b>Exécuter Tous</b>
+        </button>
+      </div>
+      <br>
+      <table class="table table-bordered" id="tabback">
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Type de grandeur</th>
+            <th>Localisation</th>
+            <th>Mode d'acquisition</th>
+            <th>Unité</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider" *ngFor="let grandeur of grandeurs | paginate: { itemsPerPage: itemsPerPage, currentPage: p }">
+          <tr>
+            <td><b>{{ grandeur.nomAbrege }}</b></td>
+            <td><b>{{ grandeur.typeGrandeur?.nom }}</b></td>
+            <td><b>{{ grandeur.localisationBarr }}</b></td>
+            <td><b>{{ grandeur.modeAcquisition }}</b></td>
+            <td><b>{{ grandeur.unite }}</b></td>
+            <td>
+              <button class="btn btn-outline-success" (click)="opendelGrDialog(grandeur.id)">
+                Supprimer
+              </button>
+              <a>&nbsp;</a>
+              <button class="btn btn-outline-success" (click)="EditProprieteGrandeurDialog(grandeur.id)">
+                Propriété
+              </button>
+              <a>&nbsp;</a>
+              <button class="btn btn-outline-success" (click)="EditParamGrandeurDialog(grandeur.id)">
+                Paramétrage
+              </button>
+              <a>&nbsp;</a>
+              <button class="btn btn-outline-success" (click)="EditerMesures(grandeur.id)">
+                Exécuter
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="display: flex; justify-content: center;">
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </div>
+    </div>
+  </div>
+  

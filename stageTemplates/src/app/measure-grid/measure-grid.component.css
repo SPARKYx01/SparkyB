@@ -1,0 +1,55 @@
+.measure-grid-container {
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  color: #343a40;
+  border-bottom: 2px solid #343a40;
+  padding-bottom: 10px;
+}
+.table {
+  background-color: white;
+  min-width: 800px; /* Définir une largeur minimale pour le tableau */
+}
+
+.table th {
+  background-color: #343a40;
+  color: white;
+  min-width: 50px; /* Définir une largeur minimale pour chaque colonne */
+}
+
+.table td {
+  min-width: 150px; /* Définir une largeur minimale pour chaque cellule */
+}
+
+
+.table-responsive {
+  overflow-x: auto; /* Assurer le défilement horizontal */
+  margin-bottom: 20px;
+  -webkit-overflow-scrolling: touch; /* Pour un meilleur défilement sur iOS */
+}
+
+#chart3DContainer {
+  width: 100%;
+  height: 500px;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+}
+
+.btn {
+  margin-right: 10px;
+}
+
+input[type="date"], input[type="number"] {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .btn {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+}

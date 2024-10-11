@@ -1,0 +1,47 @@
+<header class="header">
+  <h1>Liste des Sites</h1>
+ 
+  <div class="search-bar">
+    <input type="text" placeholder="Rechercher un site..." [(ngModel)]="searchTerm" (input)="filterSites()">
+  </div>
+
+  <div class="settings-button-container">
+    <button *ngIf="utilisateurconnecte?.role?.designation === 'Admin'" class="btn btn-primary" (click)="goToSettings()">
+      <i class="fas fa-cog"></i> Paramètres
+    </button>
+  </div>
+</header>
+
+    <div class="content-container">
+      <div class="table-container">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th (click)="sort('nom')">Site <i class="fas fa-sort"></i></th>
+              <th (click)="sort('type')">Type <i class="fas fa-sort"></i></th>
+              <th (click)="sort('localisationBarr')">Localisation <i class="fas fa-sort"></i></th>
+              <th (click)="sort('agence.nom')">Agence <i class="fas fa-sort"></i></th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let site of filteredSites">
+              <td>{{ site.nom }}</td>
+              <td>{{ site.type }}</td>
+              <td>{{ site.localisationBarr }}</td>
+              <td>{{ site.agence?.nom }}</td>
+              <td>
+                <button *ngIf="canAccess(site)" class="btn btn-primary btn-sm" (click)="nav(site.id)">
+                  <i class="fas fa-sign-in-alt"></i> Accéder
+                </button>
+                <button *ngIf="utilisateurconnecte.role.designation === 'Admin'" class="btn btn-info btn-sm ml-2" (click)="opendelGrDialog(site.id)">
+                  <i class="fas fa-trash-alt"></i> Supprimer
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+ 
+  

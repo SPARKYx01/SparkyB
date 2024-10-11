@@ -1,0 +1,104 @@
+<app-sidenav (onToggleSideNav)="onToggleSideNav($event)"></app-sidenav>
+<div class="crud-page">
+  
+    <div class="crud-spacer"></div>
+    <div class="login-container" >
+        <div class="crud-container">
+            <h3>Utilisateur :</h3>
+             
+          </div>  
+      <br>
+      <br>
+<table class="table table-bordered " id="tabback">
+    <tbody *ngIf="utilisateur">
+        <tr >
+            <td>
+                <strong>Nom:</strong>
+            </td>
+            <td>
+                <span>
+                    {{utilisateur.nom}}
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Prenom :</strong>
+            </td>
+            <td>
+                <span>
+                    {{utilisateur.prenom}}
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Nom d'Utilisateur:</strong>
+            </td>
+            <td>
+                 <span>
+                  {{utilisateur.userName}}
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Email :</strong>
+            </td>
+            <td>
+                <span>
+                    {{utilisateur.email}}
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Role:</strong>
+            </td>
+            <td>
+                <span>
+                    {{utilisateur.role?.designation}}
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Est Active:</strong>
+            </td>
+            <td>
+                <span>
+                    {{ utilisateur.estActive ? 'Oui' : 'Non' }}
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Barrage:</strong>
+            </td>
+            <td>
+                <span>
+                    {{utilisateur.site?.nom}}
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Date de Creation:</strong>
+            </td>
+            <td>
+                <span>
+                    {{utilisateur.dateCreation | date:'dd/MM/yyyy'}}
+                </span>
+            </td>
+        </tr>
+            
+    </tbody>
+</table>
+<div class="crud-container">
+    <button class="btn btn-outline-success">  <i class="fas fa-pencil-alt"></i> Modifier</button>
+    <a>&nbsp;</a><a>&nbsp;</a>
+    <button class="btn btn-outline-success"><i class="fas fa-trash-alt"></i> Supprimer</button>
+</div>
+</div>
+</div>
+

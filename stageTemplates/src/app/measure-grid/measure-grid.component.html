@@ -1,0 +1,62 @@
+
+
+<div class="measure-grid-container">
+  <h2 class="mb-4">Grille de Mesures</h2>
+  
+  <div class="mb-4">
+    <button type="button" class="btn btn-primary mr-2" (click)="addNewRow()">
+      <i class="fas fa-plus"></i> Ajouter une ligne
+    </button>
+    <button type="button" class="btn btn-success mr-2" (click)="saveAllRows()">
+      <i class="fas fa-save"></i> Enregistrer tout
+    </button>
+    <button type="button" class="btn btn-info mr-2" (click)="showGraph2D()">
+      <i class="fas fa-chart-line"></i> Graphe 2D
+    </button>
+    <button type="button" class="btn btn-warning mr-2" (click)="showGraph3D()">
+      <i class="fas fa-cube"></i> Graphe 3D
+    </button>
+  </div>
+
+  <div class="table-responsive" style="overflow-x: auto; max-width: 100%;">
+    <table class="table table-striped table-bordered" style="min-width: 800px;"> <!-- Modifie min-width selon le besoin -->
+      <thead class="thead-dark">
+        <tr>
+          <th style="min-width: 100px;">Date</th> <!-- Ajoute min-width pour chaque colonne si nécessaire -->
+          <th *ngFor="let grandeur of grandeurs" style="min-width: 100px;">{{ grandeur.nomAbrege }}</th>
+          <th style="min-width: 100px;">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of mesureGrid; let rowIndex = index; trackBy: trackByRowIndex">
+          <td>
+            <input type="date" name="date{{rowIndex}}" [(ngModel)]="row.date" class="form-control" #inputField (keydown)="handleKeydown($event, rowIndex, 0)">
+          </td>
+          <td *ngFor="let grandeur of grandeurs; let colIndex = index; trackBy: trackByGrandeurId">
+            <input type="number" name="measure{{rowIndex}}{{grandeur.id}}" [ngModel]="getMeasureValue(row, grandeur.id)" (ngModelChange)="setMeasureValue(row, grandeur.id, $event)" class="form-control" #inputField (keydown)="handleKeydown($event, rowIndex, colIndex + 1)">
+          </td>
+          <td>
+            <button type="button" class="btn btn-danger btn-sm" (click)="deleteRow(row)">
+              <i class="fas fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="showChart2D" class="mt-4">
+    <highcharts-chart 
+      [Highcharts]="Highcharts"
+      [options]="chartOptions2D"
+      style="width: 100%; height: 400px; display: block;">
+    </highcharts-chart>
+  </div>
+
+  <div *ngIf="showChart3D" class="mt-4">
+    <highcharts-chart 
+      [Highcharts]="Highcharts"
+      [options]="chartOptions3D"
+      style="width: 100%; height: 400px; display: block;">
+    </highcharts-chart>
+  </div>
+</div>

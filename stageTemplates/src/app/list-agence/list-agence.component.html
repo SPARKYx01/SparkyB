@@ -1,0 +1,46 @@
+<div class="agence-page">
+  <header class="header">
+    <h1>Liste des Agences</h1>
+    <div class="search-bar">
+      <input type="text" placeholder="Rechercher une agence..." [(ngModel)]="searchTerm" (input)="filterAgences()">
+    </div>
+    <div class="settings-button-container">
+      <button *ngIf="utilisateurconnecte?.role?.designation === 'Admin'" class="btn btn-primary" (click)="goToSet()">
+        <i class="fas fa-cog"></i> Paramètres
+      </button>
+    </div>
+  </header>
+  <div class="content-container" [ngClass]="{'map-expanded': isMapExpanded}">
+    <div class="table-container">
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th (click)="sort('nom')">Agence <i class="fas fa-sort"></i></th>
+            <th (click)="sort('ville')">Ville <i class="fas fa-sort"></i></th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let agence of filteredAgences">
+            <td>{{ agence.nom }}</td>
+            <td>{{ agence.ville }}</td>
+            <td>
+              <button *ngIf="canAccess(agence)" class="btn btn-primary btn-sm" (click)="nav(agence.id)">
+                <i class="fas fa-sign-in-alt"></i> Accéder
+              </button>
+              <button class="btn btn-info btn-sm ml-2" (click)="showOnMap(agence)">
+                <i class="fas fa-map-marker-alt"></i> Voir sur la carte
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div id="map">
+      <button *ngIf="isMapExpanded" (click)="reduceMap()" class="btn btn-sm btn-secondary map-reduce-btn">
+        Réduire la carte
+      </button>
+    </div>
+  </div>
+</div>
